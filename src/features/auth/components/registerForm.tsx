@@ -17,6 +17,7 @@ import { useState } from "react";
 import useRegister from "../hooks/useRegister";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MINIMUM_PASSWORD_LENGTH } from "@/shared/lib/constant";
+import Link from "next/link";
 
 type Inputs = {
   name: string;
@@ -70,7 +71,7 @@ export default function RegisterForm() {
   };
   return (
     <form
-      className="flex flex-col w-[345px] h-fit rounded-xl border p-6 gap-5 bg-white border-neutral-200 shadow-md"
+      className="flex flex-col w-[345px] lg:w-100 h-fit rounded-xl border p-6 gap-5 bg-white border-neutral-200 shadow-md"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-xl font-bold tracking-tight leading-8.5 text-neutral-950">
@@ -166,10 +167,16 @@ export default function RegisterForm() {
       </FieldGroup>
       <Button
         type="submit"
-        className="text-sm -leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
+        className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
       >
         Register
       </Button>
+      <p className="text-sm leading-7 tracking-tight text-neutral-950 text-center">
+        Already have an account?{" "}
+        <Link href="/login" className="cursor-pointer">
+          <span className="font-bold text-primary-300">Log In</span>
+        </Link>
+      </p>
     </form>
   );
 }
