@@ -6,7 +6,7 @@ export type RegisterResponse = {
 
 export type LoginParam = {
   email: string;
-  passsword: string;
+  password: string;
 };
 
 export interface LoginResponse {
@@ -16,4 +16,6 @@ export interface LoginResponse {
 export interface RegisterParam extends LoginParam {
   name: string;
   username: string;
+  email: string;
+  password: string;
 }
