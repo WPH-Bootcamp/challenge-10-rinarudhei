@@ -82,7 +82,10 @@ async function fetchAPI<T>(
   }
 }
 
-export async function apiGet<T>(endpoint: string, token?: string): Promise<T> {
+export async function apiGet<T>(
+  endpoint: string,
+  token?: string | null,
+): Promise<T> {
   const data = await fetchAPI<T>(endpoint, {
     method: HTTP_METHODS[0],
     token,

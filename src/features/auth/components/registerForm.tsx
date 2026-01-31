@@ -1,23 +1,23 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldContent,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@/shared/components/ui/field";
+import { Input } from "@/shared/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/shared/components/ui/input-group";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 import useRegister from "../hooks/useRegister";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { MINIMUM_PASSWORD_LENGTH } from "@/shared/lib/constant";
 import Link from "next/link";
+import { Button } from "@/shared/components/ui/button";
 
 type Inputs = {
   name: string;

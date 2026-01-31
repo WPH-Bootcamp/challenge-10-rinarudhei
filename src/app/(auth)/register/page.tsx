@@ -1,15 +1,11 @@
 "use client";
 
 import RegisterForm from "@/features/auth/components/registerForm";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function RegisterPage() {
-  const queryClient = new QueryClient();
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <QueryClientProvider client={queryClient}>
-        <RegisterForm />
-      </QueryClientProvider>
+      <RegisterForm />
     </div>
   );
 }

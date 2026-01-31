@@ -4,8 +4,10 @@ import { useCallback } from "react";
 
 export const useLogout = () => {
   const router = useRouter();
-  return useCallback(() => {
+  const logout = useCallback(() => {
     removeToken();
     router.push("/login");
   }, [router]);
+
+  return { logout };
 };
