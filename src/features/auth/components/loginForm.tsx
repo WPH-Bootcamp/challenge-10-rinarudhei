@@ -13,10 +13,11 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Eye, EyeClosed } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import useLogin from "../hooks/useLogin";
+import { getToken } from "@/shared/lib/auth";
 
 type Inputs = {
   email: string;

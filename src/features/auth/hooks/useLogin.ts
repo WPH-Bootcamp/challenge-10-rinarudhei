@@ -8,8 +8,8 @@ export default function useLogin() {
   const router = useRouter();
   return useMutation({
     mutationFn: login,
-    onSuccess: (data: LoginResponse) => {
-      saveToken(data.token);
+    onSuccess: async (data: LoginResponse) => {
+      await saveToken(data.token);
       router.push("/");
     },
   });

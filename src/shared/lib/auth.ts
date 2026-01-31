@@ -14,12 +14,15 @@ export type StoredUser = {
   email: string;
 };
 
-export function saveToken(token: string) {
-  if (typeof window == "undefined") return;
+export async function saveToken(token: string) {
+  if (typeof window === undefined) return;
 
   localStorage.setItem(AUTH_TOKEN_KEY, token);
-  cookieStore.set({
-    expires: 604800,
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 7);
+
+  await cookieStore.set({
+    expires: expirationDate.getTime(),
     name: AUTH_COOKIE_TOKEN_KEY,
     path: "/",
     sameSite: "lax",
@@ -28,7 +31,7 @@ export function saveToken(token: string) {
 }
 
 export function getToken(): string | null {
-  if (typeof window == "undefined") return null;
+  if (typeof window == undefined) return null;
 
   return localStorage.getItem(AUTH_TOKEN_KEY);
 }
