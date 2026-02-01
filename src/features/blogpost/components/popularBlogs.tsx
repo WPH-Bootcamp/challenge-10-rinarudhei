@@ -11,7 +11,7 @@ export default function PopularBlogs() {
   });
 
   return (
-    <div className="flex flex-col overflow-hidden">
+    <div className="flex flex-col overflow-hidden lg:overflow-visible">
       {isError ? (
         <div className="flex justify-center items-center min-h-screen mx-auto">
           <div className="text-center text-red-600">
@@ -21,7 +21,7 @@ export default function PopularBlogs() {
       ) : isPending ? (
         <Spinner className="mx-auto">Loading...</Spinner>
       ) : (
-        <div>
+        <div className="">
           {data?.data.map((d, i, arr) => (
             <React.Fragment key={i}>
               <BlogCard

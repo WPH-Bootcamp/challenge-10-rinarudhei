@@ -44,8 +44,8 @@ export default function BlogList() {
       ) : isPending ? (
         <Spinner className="mx-auto">Loading...</Spinner>
       ) : (
-        <div className="flex flex-col gap-4">
-          {data?.data.map((d, i, arr) => (
+        <div className="flex flex-col gap-4 w-full">
+          {data?.data.map((d, i) => (
             <React.Fragment key={i}>
               <BlogCard
                 key={i}
@@ -57,7 +57,6 @@ export default function BlogList() {
                 imageUrl={d.imageUrl}
                 tags={d.tags}
                 createdAt={d.createdAt}
-                isLast={arr.length === i + 1}
               ></BlogCard>
             </React.Fragment>
           ))}
@@ -66,12 +65,12 @@ export default function BlogList() {
               {data.page > 1 && (
                 <>
                   <PaginationItem>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                  <PaginationItem>
                     <PaginationPrevious
                       onClick={() => setNextPage(data.page - 1)}
                     />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationEllipsis />
                   </PaginationItem>
                   <PaginationItem>
                     <PaginationLink onClick={() => setNextPage(data.page - 1)}>
