@@ -22,7 +22,7 @@ export default function PopularBlogs() {
         <Spinner className="mx-auto">Loading...</Spinner>
       ) : (
         <div>
-          {data?.data.map((d, i) => (
+          {data?.data.map((d, i, arr) => (
             <React.Fragment key={i}>
               <BlogCard
                 key={i}
@@ -30,6 +30,7 @@ export default function PopularBlogs() {
                 content={d.content}
                 comments={d.comments}
                 likes={d.likes}
+                isLast={arr.length === i + 1}
               ></BlogCard>
             </React.Fragment>
           ))}

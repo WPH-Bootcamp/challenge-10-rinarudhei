@@ -3,7 +3,6 @@
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useGetRecommendedBlogs } from "../hooks/useBlogposts";
 import BlogCard from "./blogCard";
-import { Separator } from "@/shared/components/ui/separator";
 import {
   Pagination,
   PaginationContent,
@@ -13,16 +12,29 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/shared/components/ui/pagination";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { getRecommendedBlogs } from "../services/blogpostServices";
 
 export default function BlogList() {
-  const { data, isPending, isError } = useGetRecommendedBlogs({
-    page: 1,
-    limit: 5,
-  });
+  const queryClient = useQueryClient();
+  const [nextPage, setNextPage] = useState(1);
+  const { data, isPending, isError, isPlaceholderData } =
+    useGetRecommendedBlogs({
+      page: nextPage,
+      limit: 5,
+    });
+  useEffect(() => {
+    if (!isPlaceholderData && data && data.page < data.lastPage) {
+      queryClient.prefetchQuery({
+        queryKey: ["recommended-blogs", data.page + 1, 5],
+        queryFn: () => getRecommendedBlogs({ page: data.page + 1, limit: 5 }),
+      });
+    }
+  }, [data, isPlaceholderData, nextPage, queryClient]);
 
   return (
-    <div className="flex flex-col overflow-hidden">
+    <div className="flex flex-col justify-center items-center">
       {isError ? (
         <div className="flex justify-center items-center min-h-screen">
           <div className="text-center text-red-600">
@@ -30,10 +42,10 @@ export default function BlogList() {
           </div>
         </div>
       ) : isPending ? (
-        <Spinner>Loading...</Spinner>
+        <Spinner className="mx-auto">Loading...</Spinner>
       ) : (
-        <div>
-          {data?.data.map((d, i) => (
+        <div className="flex flex-col gap-4">
+          {data?.data.map((d, i, arr) => (
             <React.Fragment key={i}>
               <BlogCard
                 key={i}
@@ -45,32 +57,52 @@ export default function BlogList() {
                 imageUrl={d.imageUrl}
                 tags={d.tags}
                 createdAt={d.createdAt}
+                isLast={arr.length === i + 1}
               ></BlogCard>
-              <Separator />
             </React.Fragment>
           ))}
           <Pagination>
             <PaginationContent>
+              {data.page > 1 && (
+                <>
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => setNextPage(data.page - 1)}
+                    />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink onClick={() => setNextPage(data.page - 1)}>
+                      {data.page - 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                </>
+              )}
+
               <PaginationItem>
-                <PaginationPrevious href="#" />
+                <PaginationLink isActive>{data.page}</PaginationLink>
               </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  2
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
+              {data.lastPage !== data.page && (
+                <>
+                  <PaginationItem
+                    onClick={() => setNextPage(data.page + 1)}
+                    className="cursor-pointer"
+                  >
+                    <PaginationLink>{data.page + 1}</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                  <PaginationItem
+                    onClick={() => setNextPage(data.page + 1)}
+                    className="cursor-pointer"
+                  >
+                    <PaginationNext />
+                  </PaginationItem>
+                </>
+              )}
             </PaginationContent>
           </Pagination>
         </div>

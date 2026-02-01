@@ -22,6 +22,5 @@ export function generateAvatarFallback(name: string): string {
   } else {
     secondLetter = names[1][0].toUpperCase();
   }
-  console.log(`${firstLetter}${secondLetter}`);
   return `${firstLetter}${secondLetter}`;
 }
