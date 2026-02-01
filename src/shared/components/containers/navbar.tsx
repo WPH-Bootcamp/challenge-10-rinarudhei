@@ -25,12 +25,7 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
 import { Field } from "../ui/field";
-import { Input } from "../ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "../ui/input-group";
+import { InputGroup, InputGroupInput } from "../ui/input-group";
 
 export function Navbar() {
   const { data, isPending, isError } = useGetMe();

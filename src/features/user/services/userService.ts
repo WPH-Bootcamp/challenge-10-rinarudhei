@@ -1,9 +1,9 @@
 import { apiGet } from "@/shared/lib/api";
-import { getTokenFromCookies } from "@/shared/lib/auth";
+import { getToken } from "@/shared/lib/auth";
 import { UserMe } from "../types/user";
 
 export async function getUserMe(): Promise<UserMe | null> {
-  const token = await getTokenFromCookies();
+  const token = await getToken();
   if (!token) {
     return null;
   }
