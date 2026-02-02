@@ -44,13 +44,13 @@ export default function BlogCard({
             <Image
               src={imageUrl as string}
               fill
-              className="rounded-[6px] absolute"
+              className="rounded-sm absolute"
               alt="blog post image"
             />
           </div>
         )}
         <div className="flex flex-col h-full w-full lg:w-110.75">
-          <CardTitle className="w-full h-full text-start text-neutral-900 mb-2 lg:mb-3 lg:text-xl">
+          <CardTitle className="w-full h-full text-start text-neutral-900 mb-2 lg:mb-3 lg:text-xl text-wrap">
             {title}
           </CardTitle>
           {tags && (
@@ -58,7 +58,7 @@ export default function BlogCard({
               {tags.map((t, i) => (
                 <Badge
                   key={i}
-                  className="px-2 py-1 rounded-md bg-white border border-neutral-300 text-xs tracking-tight leading-6 text-neutral-900"
+                  className="px-2 py-1 rounded-md bg-white border border-neutral-300 text-xs text-neutral-900"
                 >
                   {t}
                 </Badge>
@@ -66,7 +66,7 @@ export default function BlogCard({
             </div>
           )}
           <CardContent className="mb-3 lg:mb-4 w-full h-full p-0 mt-0 mx-0">
-            <article className="text-ellipsis line-clamp-2 mb-3 lg:mb-3 lg:text-base">
+            <article className="text-ellipsis line-clamp-2 mb-3 lg:mb-3 lg:text-md">
               {content}
             </article>
             {author && (
@@ -74,16 +74,14 @@ export default function BlogCard({
                 <Avatar className="w-7.5 h-7.5 lg:w-10 lg:h-10">
                   <AvatarImage sizes="30 30" src={""} alt="" />
                   <AvatarFallback>
-                    <div className="rounded-full w-7.5 h-7.5 lg:w-10 lg:h-10 flex justify-center items-center border-2 border-neutral-500 text-base lg:text-xl text-neutral-500 bg-neutral-100">
+                    <div className="rounded-full w-7.5 h-7.5 lg:w-10 lg:h-10 flex justify-center items-center border-2 border-neutral-500 text-md lg:text-xl text-neutral-500 bg-neutral-100">
                       <p>{generateAvatarFallback(author)}</p>
                     </div>
                   </AvatarFallback>
                 </Avatar>
-                <p className="text-neutral-900 text-xs leading-6 tracking-tight lg:text-sm">
-                  {author}
-                </p>
+                <p className="text-neutral-900 text-xs lg:text-sm">{author}</p>
                 <Dot size={4} className="bg-neutral-400 rounded-full" />
-                <p className="text-neutral-900 text-xs lg:text-sm leading-6 lg:leading-7 tracking-tight">
+                <p className="text-neutral-900 text-xs lg:text-sm">
                   {dayjs(createdAt).format("DD MMMM YYYY")}
                 </p>
               </div>
@@ -92,15 +90,11 @@ export default function BlogCard({
           <CardFooter className="gap-3 lg:gap-5 p-0 m-0 h-full w-full">
             <div className="gap-1.5 flex">
               <ThumbsUp />
-              <p className="text-neutral-900 text-xs lg:text-sm lg:leading-7 leading-6 tracking-tight">
-                {likes}
-              </p>
+              <p className="text-neutral-900 text-xs lg:text-sm">{likes}</p>
             </div>
             <div className="gap-1.5 flex">
               <MessageSquare />
-              <p className="text-neutral-900 text-xs lg:text-sm lg:leading-7 leading-6 tracking-tight">
-                {comments}
-              </p>
+              <p className="text-neutral-900 text-xs lg:text-sm">{comments}</p>
             </div>
           </CardFooter>
         </div>

@@ -43,15 +43,20 @@ export default function LoginForm() {
   };
   return (
     <form
-      className="flex flex-col w-[345px] lg:w-100 h-fit rounded-xl border p-6 gap-5 bg-white border-neutral-200 shadow-md"
+      className="flex flex-col w-86.25 lg:w-90 h-fit rounded-xl outline p-6 gap-5 bg-white border-neutral-200 shadow-[0px_0px_24px_0px_#CDCCCC]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-xl font-bold tracking-tight leading-8.5 text-neutral-950">
-        Sign Up
+      <h1 className="text-xl h-8.5 font-bold text-neutral-950 w-full">
+        Sign In
       </h1>
       <FieldGroup>
         <FieldContent>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
+          <FieldLabel
+            htmlFor="email"
+            className="font-semibold text-sm w-full h-7"
+          >
+            Email
+          </FieldLabel>
           <Field>
             <Input
               id="email"
@@ -59,15 +64,20 @@ export default function LoginForm() {
               placeholder="Enter your email"
               {...register("email", { required: true })}
             />
-            {errors.email && (
-              <span className="text-xs tracking-tight leading-6 text-[#ee1d52]">
-                This field is required
-              </span>
-            )}
           </Field>
+          {errors.email && (
+            <span className="text-xs text-[#ee1d52] h-6">
+              This field is required
+            </span>
+          )}
         </FieldContent>
         <FieldContent>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <FieldLabel
+            htmlFor="password"
+            className="font-semibold text-sm w-full h-7"
+          >
+            Password
+          </FieldLabel>
           <Field>
             <InputGroup>
               <InputGroupInput
@@ -76,35 +86,47 @@ export default function LoginForm() {
                 placeholder="Enter your password"
                 {...register("password", { required: true })}
               />
-              <InputGroupAddon align="inline-end" onClick={toggleEye}>
+              <InputGroupAddon
+                align="inline-end"
+                onClick={toggleEye}
+                className="h-fit w-fit"
+              >
                 {isEye ? (
-                  <Eye className="font-extrabold text-neutral-950"></Eye>
+                  <Eye
+                    size={20}
+                    className="font-extrabold text-neutral-950 w-5 h-5"
+                  ></Eye>
                 ) : (
-                  <EyeClosed className="font-extrabold text-neutral-950"></EyeClosed>
+                  <EyeClosed
+                    size={20}
+                    className="font-extrabold text-neutral-950"
+                  ></EyeClosed>
                 )}
               </InputGroupAddon>
             </InputGroup>
-            {errors.password && (
-              <span className="text-xs tracking-tight leading-6 text-[#ee1d52]">
-                This field is required
-              </span>
-            )}
           </Field>
+          {errors.password && (
+            <span className="text-xs text-[#ee1d52] h-6">
+              This field is required
+            </span>
+          )}
         </FieldContent>
       </FieldGroup>
       <Button
         type="submit"
-        className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
+        className="text-sm text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
         disabled={isPending}
       >
         {isPending ? <Spinner /> : "Login"}
       </Button>
-      <p className="text-sm leading-7 tracking-tight text-neutral-950 text-center">
-        Don&apos;t have an account?{" "}
-        <Link href="/register" className="cursor-pointer">
-          <span className="font-bold text-primary-300">Register</span>
-        </Link>
-      </p>
+      <div className="h-7 flex justify-center items-center gap-0.5">
+        <p className="text-sm text-neutral-950 text-center ">
+          Don&apos;t have an account?{" "}
+          <Link href="/register" className="cursor-pointer">
+            <span className="font-bold text-primary-300">Register</span>
+          </Link>
+        </p>
+      </div>
     </form>
   );
 }

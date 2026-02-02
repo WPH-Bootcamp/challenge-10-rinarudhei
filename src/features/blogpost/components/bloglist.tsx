@@ -120,15 +120,13 @@ export default function BlogList({ query }: BlogListProps) {
         <div className="flex flex-col w-fit absolute top-3/10 md:top-2/5 gap-6 md:left-9/20 items-center justify-start">
           <NotFound />
           <div className="flex flex-col">
-            <h3 className="font-semibold text-sm leading-7 tracking-tight text-center">
+            <h3 className="font-semibold text-sm text-center">
               No results found
             </h3>
-            <p className="text-sm leading-7 tracking-tight text-center">
-              Try using different keywords
-            </p>
+            <p className="text-sm text-center">Try using different keywords</p>
           </div>
           <Button
-            className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300 h-11 w-50 cursor-pointer"
+            className="text-sm text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
             onClick={() => router.push("/")}
           >
             Back to Home

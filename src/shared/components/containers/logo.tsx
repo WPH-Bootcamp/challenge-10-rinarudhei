@@ -1,4 +1,4 @@
-export default async function Logo() {
+export default function Logo() {
   return (
     <svg
       className="h-6 w-auto sm:h-7 md:h-8 lg:h-9"
