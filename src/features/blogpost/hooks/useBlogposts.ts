@@ -7,10 +7,13 @@ import {
 import { BlogPost } from "../types/blogpost";
 import { ApiError } from "next/dist/server/api-utils";
 
-export function useGetRecommendedBlogs(params: PaginationParam) {
+export function useGetRecommendedBlogs(
+  params: PaginationParam,
+  query: string | string[] | undefined,
+) {
   return useQuery<PaginationResponse<BlogPost>, ApiError>({
-    queryKey: ["recommended-blogs", params.page, params.limit],
-    queryFn: () => getRecommendedBlogs(params),
+    queryKey: ["recommended-blogs", params.page, params.limit, query],
+    queryFn: () => getRecommendedBlogs(params, query),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 3600 * 24,
   });

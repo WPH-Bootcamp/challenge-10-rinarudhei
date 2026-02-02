@@ -26,14 +26,26 @@ import { useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
 import { Field } from "../ui/field";
 import { InputGroup, InputGroupInput } from "../ui/input-group";
+import React from "react";
 
 export function Navbar() {
   const { data, isPending, isError } = useGetMe();
   const { logout } = useLogout();
+  const [searchText, setSearchText] = React.useState("");
   const router = useRouter();
+
   const handleClickRegister = () => {
     router.push("/register");
   };
+
+  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      router.push(`/?query=${searchText}&page=1&limit=5`);
+      setSearchText("");
+      event.preventDefault();
+    }
+  };
+
   return (
     <NavigationMenu className="min-w-80 max-w-360 mx-auto border-b border-neutral-300 border-box">
       <NavigationMenuList className="h-16 min-w-72 w-screen px-4 py-5 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-305">
@@ -49,7 +61,10 @@ export function Navbar() {
                 <Search size={24} className="text-neutral-300" />
                 <InputGroupInput
                   className="text-sm leading-7 md:text-base md:leading-7.5  tracking-tight text-neutral-600"
+                  value={searchText}
                   placeholder="Search"
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={handleOnKeyDown}
                 />
               </InputGroup>
             </Field>

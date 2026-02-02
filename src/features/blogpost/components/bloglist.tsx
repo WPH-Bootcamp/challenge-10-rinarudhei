@@ -15,23 +15,34 @@ import {
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { getRecommendedBlogs } from "../services/blogpostServices";
+import NotFound from "@/shared/components/containers/notfound";
+import { Button } from "@/shared/components/ui/button";
+import { useRouter } from "next/navigation";
 
-export default function BlogList() {
+type BlogListProps = {
+  query?: string | string[] | undefined;
+};
+export default function BlogList({ query }: BlogListProps) {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [nextPage, setNextPage] = useState(1);
   const { data, isPending, isError, isPlaceholderData } =
-    useGetRecommendedBlogs({
-      page: nextPage,
-      limit: 5,
-    });
+    useGetRecommendedBlogs(
+      {
+        page: nextPage,
+        limit: 5,
+      },
+      query,
+    );
   useEffect(() => {
     if (!isPlaceholderData && data && data.page < data.lastPage) {
       queryClient.prefetchQuery({
-        queryKey: ["recommended-blogs", data.page + 1, 5],
-        queryFn: () => getRecommendedBlogs({ page: data.page + 1, limit: 5 }),
+        queryKey: ["recommended-blogs", data.page + 1, 5, query],
+        queryFn: () =>
+          getRecommendedBlogs({ page: data.page + 1, limit: 5 }, query),
       });
     }
-  }, [data, isPlaceholderData, nextPage, queryClient]);
+  }, [data, isPlaceholderData, nextPage, queryClient, query]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -43,9 +54,9 @@ export default function BlogList() {
         </div>
       ) : isPending ? (
         <Spinner className="mx-auto">Loading...</Spinner>
-      ) : (
+      ) : data?.data.length > 0 ? (
         <div className="flex flex-col gap-4 w-full">
-          {data?.data.map((d, i) => (
+          {data.data.map((d, i) => (
             <React.Fragment key={i}>
               <BlogCard
                 key={i}
@@ -104,6 +115,24 @@ export default function BlogList() {
               )}
             </PaginationContent>
           </Pagination>
+        </div>
+      ) : (
+        <div className="flex flex-col w-93 absolute top-3/10 md:top-2/5 gap-6 md:left-3/8 items-center justify-start">
+          <NotFound />
+          <div className="flex flex-col">
+            <h3 className="font-semibold text-sm leading-7 tracking-tight text-center">
+              No results found
+            </h3>
+            <p className="text-sm leading-7 tracking-tight text-center">
+              Try using different keywords
+            </p>
+          </div>
+          <Button
+            className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300 h-11 w-50 cursor-pointer"
+            onClick={() => router.push("/")}
+          >
+            Back to Home
+          </Button>
         </div>
       )}
     </div>
