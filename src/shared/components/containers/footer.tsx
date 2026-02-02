@@ -1,4 +1,4 @@
-export default function Footer() {
+export default async function Footer() {
   return (
     <footer className="min-w-80 max-w-360 mx-auto border-t border-neutral-300 border-box">
       <div className="h-16 min-w-72 w-screen p-2 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-305 gap-2 flex flex-col justify-center items-center mx-auto">
