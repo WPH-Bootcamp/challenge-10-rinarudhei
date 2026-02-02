@@ -17,6 +17,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import useLogin from "../hooks/useLogin";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 type Inputs = {
   email: string;
@@ -29,7 +30,7 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<Inputs>();
   const [isEye, setIsEye] = useState(false);
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const onSubmit: SubmitHandler<Inputs> = ({ email, password }) => {
     mutate({
@@ -94,8 +95,9 @@ export default function LoginForm() {
       <Button
         type="submit"
         className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
+        disabled={isPending}
       >
-        Login
+        {isPending ? <Spinner /> : "Login"}
       </Button>
       <p className="text-sm leading-7 tracking-tight text-neutral-950 text-center">
         Don&apos;t have an account?{" "}

@@ -53,7 +53,7 @@ export default function BlogList({ query }: BlogListProps) {
           </div>
         </div>
       ) : isPending ? (
-        <Spinner className="mx-auto">Loading...</Spinner>
+        <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : data?.data.length > 0 ? (
         <div className="flex flex-col gap-4 w-full">
           {data.data.map((d, i) => (
@@ -117,7 +117,7 @@ export default function BlogList({ query }: BlogListProps) {
           </Pagination>
         </div>
       ) : (
-        <div className="flex flex-col w-93 absolute top-3/10 md:top-2/5 gap-6 md:left-3/8 items-center justify-start">
+        <div className="flex flex-col w-fit absolute top-3/10 md:top-2/5 gap-6 md:left-9/20 items-center justify-start">
           <NotFound />
           <div className="flex flex-col">
             <h3 className="font-semibold text-sm leading-7 tracking-tight text-center">

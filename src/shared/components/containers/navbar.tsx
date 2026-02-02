@@ -54,20 +54,20 @@ export function Navbar() {
             <Logo />
           </Link>
         </NavigationMenuItem>
+        <Field className="hidden lg:inline max-w-93.25">
+          <InputGroup className="flex h-12 rounded-xl py-2 px-3 lg:py-3 lg:px-4 bg-base-white justify-start items-center">
+            <Search size={24} className="text-neutral-300" />
+            <InputGroupInput
+              className="text-sm leading-7 md:text-base md:leading-7.5  tracking-tight text-neutral-600"
+              value={searchText}
+              placeholder="Search"
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={handleOnKeyDown}
+            />
+          </InputGroup>
+        </Field>
         {data && !isPending && !isError ? (
           <>
-            <Field className="hidden lg:inline max-w-93.25">
-              <InputGroup className="flex h-12 rounded-xl py-2 px-3 lg:py-3 lg:px-4 bg-base-white justify-start items-center">
-                <Search size={24} className="text-neutral-300" />
-                <InputGroupInput
-                  className="text-sm leading-7 md:text-base md:leading-7.5  tracking-tight text-neutral-600"
-                  value={searchText}
-                  placeholder="Search"
-                  onChange={(e) => setSearchText(e.target.value)}
-                  onKeyDown={handleOnKeyDown}
-                />
-              </InputGroup>
-            </Field>
             <NavigationMenuList className="w-fit sm:w-65 h-10 px-3">
               <NavigationMenuItem className="hidden sm:inline">
                 <Link

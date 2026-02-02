@@ -19,7 +19,7 @@ export default function PopularBlogs() {
           </div>
         </div>
       ) : isPending ? (
-        <Spinner className="mx-auto">Loading...</Spinner>
+        <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : (
         <div className="">
           {data?.data.map((d, i, arr) => (

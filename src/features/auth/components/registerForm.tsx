@@ -18,6 +18,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { MINIMUM_PASSWORD_LENGTH } from "@/shared/lib/constant";
 import Link from "next/link";
 import { Button } from "@/shared/components/ui/button";
+import { Spinner } from "@/shared/components/ui/spinner";
 
 type Inputs = {
   name: string;
@@ -33,7 +34,7 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<Inputs>();
   const [isEye, setIsEye] = useState(false);
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const onSubmit: SubmitHandler<Inputs> = ({
     name,
@@ -168,8 +169,9 @@ export default function RegisterForm() {
       <Button
         type="submit"
         className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
+        disabled={isPending}
       >
-        Register
+        {isPending ? <Spinner /> : "Register"}
       </Button>
       <p className="text-sm leading-7 tracking-tight text-neutral-950 text-center">
         Already have an account?{" "}

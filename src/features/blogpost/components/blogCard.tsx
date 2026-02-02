@@ -58,7 +58,7 @@ export default function BlogCard({
               {tags.map((t, i) => (
                 <Badge
                   key={i}
-                  className="p-2 rounded-md bg-white border border-neutral-300 text-xs tracking-tight leading-6 text-neutral-900"
+                  className="px-2 py-1 rounded-md bg-white border border-neutral-300 text-xs tracking-tight leading-6 text-neutral-900"
                 >
                   {t}
                 </Badge>
