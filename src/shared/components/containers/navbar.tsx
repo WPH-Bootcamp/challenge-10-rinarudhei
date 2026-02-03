@@ -47,8 +47,8 @@ export function Navbar() {
   };
 
   return (
-    <NavigationMenu className="min-w-80 max-w-360 mx-auto border-b border-neutral-300 border-box fixed top-0 bg-white">
-      <NavigationMenuList className="h-16 min-w-72 w-screen px-4 py-5 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-305">
+    <NavigationMenu className="min-w-80 max-w-360 mx-auto border-b border-neutral-300 border-box fixed top-0 bg-white w-screen">
+      <NavigationMenuList className="h-16 min-w-72 w-screen px-4 py-5 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-300 mx-auto">
         <NavigationMenuItem>
           <Link href="/">
             <Logo />

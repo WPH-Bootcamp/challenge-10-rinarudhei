@@ -90,7 +90,11 @@ export default function BlogList({ query }: BlogListProps) {
               )}
 
               <PaginationItem>
-                <PaginationLink isActive>{data.page}</PaginationLink>
+                {isPending || isPlaceholderData ? (
+                  <Spinner />
+                ) : (
+                  <PaginationLink isActive>{data.page}</PaginationLink>
+                )}
               </PaginationItem>
               {data.lastPage !== data.page && (
                 <>

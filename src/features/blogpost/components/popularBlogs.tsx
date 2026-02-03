@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
-import BlogCard from "./blogCard";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useGetPopularBlogs } from "../hooks/useBlogposts";
 import { Separator } from "@/shared/components/ui/separator";
+import PopularCard from "./popularCard";
 
 export default function PopularBlogs() {
   const { data, isError, isPending } = useGetPopularBlogs({
-    limit: 5,
+    limit: 3,
     page: 1,
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 lg:gap-5 h-full">
       {isError ? (
         <div className="flex justify-center items-center min-h-screen mx-auto">
           <div className="text-center text-red-600">
@@ -25,12 +25,12 @@ export default function PopularBlogs() {
         <>
           {data?.data.map((d, i, arr) => (
             <React.Fragment key={i}>
-              <BlogCard
+              <PopularCard
                 title={d.title}
                 content={d.content}
                 comments={d.comments}
                 likes={d.likes}
-              ></BlogCard>
+              ></PopularCard>
               {i !== arr.length - 1 && <Separator />}
             </React.Fragment>
           ))}

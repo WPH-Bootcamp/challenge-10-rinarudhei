@@ -11,7 +11,7 @@ export default async function HomeContent({ searchParams }: HomeContentProps) {
 
   return (
     <div className="min-h-screen min-w-80 max-w-360 mx-auto mt-16">
-      <div className="mx-auto px-4 py-6 min-w-72 w-screen sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-305 flex flex-col gap-4 items-center justify-start lg:grid lg:auto-cols-max lg:grid-flow-col lg:items-start">
+      <div className="mx-auto px-4 py-6 min-w-72 w-screen sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-300 flex flex-col gap-4 items-center justify-start lg:flex-row lg:justify-between lg:items-start">
         {query ? (
           <main className="flex flex-col gap-4 w-auto lg:w-160 xl:w-201.75">
             <h1 className="text-cs-xl font-bold text-neutral-900 sm:text-2xl lg:text-display-sm h-8.5 lg:h-9">
@@ -33,7 +33,7 @@ export default async function HomeContent({ searchParams }: HomeContentProps) {
             <div className="hidden lg:inline h-418.25">
               <Separator orientation="vertical" />
             </div>
-            <aside className="w-full lg:w-56 xl:w-86.25 flex flex-col gap-4">
+            <aside className="w-full flex flex-col gap-4 lg:gap-5 lg:w-74.25">
               <h1 className="text-cs-xl font-bold text-neutral-900 sm:text-2xl lg:text-display-sm h-8.5 lg:h-9">
                 Most liked
               </h1>

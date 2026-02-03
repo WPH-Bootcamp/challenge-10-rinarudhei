@@ -6,7 +6,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
-      className={cn("gap-3 flex flex-col h-38", className)}
+      className={cn("gap-3 flex flex-col flex-wrap h-38", className)}
       {...props}
     />
   );
@@ -62,7 +62,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("gap-1 flex flex-col", className)}
+      className={cn("gap-1 lg:gap-3 flex flex-col", className)}
       {...props}
     />
   );
@@ -72,7 +72,10 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("grid grid-cols-3 h-7 gap-3 lg:gap-5 w-[149px]", className)}
+      className={cn(
+        "grid grid-cols-3 h-7 gap-3 lg:gap-5 w-37.25 items-center",
+        className,
+      )}
       {...props}
     />
   );
