@@ -42,6 +42,19 @@ export default function RegisterForm() {
     password,
     confirmPassword,
   }) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError(
+        "email",
+        {
+          message: "invalid email",
+          type: "manual",
+        },
+        { shouldFocus: true },
+      );
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError(
         "confirmPassword",
@@ -51,6 +64,8 @@ export default function RegisterForm() {
         },
         { shouldFocus: false },
       );
+
+      return;
     }
 
     if (password.length < MINIMUM_PASSWORD_LENGTH) {
@@ -59,6 +74,8 @@ export default function RegisterForm() {
         { message: "Password must be at least 8 characters", type: "length" },
         { shouldFocus: true },
       );
+
+      return;
     }
     mutate({
       name,
@@ -72,15 +89,20 @@ export default function RegisterForm() {
   };
   return (
     <form
-      className="flex flex-col w-[345px] lg:w-100 h-fit rounded-xl border p-6 gap-5 bg-white border-neutral-200 shadow-md"
+      className="flex flex-col w-86.25 lg:w-100 h-fit rounded-xl outline p-6 gap-5 bg-white border-neutral-200 shadow-[0px_0px_24px_0px_#CDCCCC]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-xl font-bold tracking-tight leading-8.5 text-neutral-950">
+      <h1 className="text-xl h-8.5 font-bold text-neutral-950 w-full">
         Sign Up
       </h1>
       <FieldGroup>
         <FieldContent>
-          <FieldLabel htmlFor="name">Name</FieldLabel>
+          <FieldLabel
+            htmlFor="name"
+            className="font-semibold text-sm w-full h-7"
+          >
+            Name
+          </FieldLabel>
           <Field>
             <Input
               id="name"
@@ -88,15 +110,20 @@ export default function RegisterForm() {
               placeholder="Enter your name"
               {...register("name", { required: true })}
             />
-            {errors.name && (
-              <span className="text-xs tracking-tight leading-6 text-[#ee1d52]">
-                This field is required
-              </span>
-            )}
           </Field>
+          {errors.name && (
+            <span className="text-xs text-[#ee1d52] h-6">
+              This field is required
+            </span>
+          )}
         </FieldContent>
         <FieldContent>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
+          <FieldLabel
+            htmlFor="email"
+            className="font-semibold text-sm w-full h-7"
+          >
+            Email
+          </FieldLabel>
           <Field>
             <Input
               id="email"
@@ -104,15 +131,20 @@ export default function RegisterForm() {
               placeholder="Enter your email"
               {...register("email", { required: true })}
             />
-            {errors.email && (
-              <span className="text-xs tracking-tight leading-6 text-[#ee1d52]">
-                This field is required
-              </span>
-            )}
           </Field>
+          {errors.email && (
+            <span className="text-xs leading-6 text-[#ee1d52] h-6">
+              {`${errors.email.type === "manual" ? "Invalid email" : "This field is required"}`}
+            </span>
+          )}
         </FieldContent>
         <FieldContent>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <FieldLabel
+            htmlFor="password"
+            className="font-semibold text-sm w-full h-7"
+          >
+            Password
+          </FieldLabel>
           <Field>
             <InputGroup>
               <InputGroupInput
@@ -123,23 +155,34 @@ export default function RegisterForm() {
               />
               <InputGroupAddon align="inline-end" onClick={toggleEye}>
                 {isEye ? (
-                  <Eye className="font-extrabold text-neutral-950"></Eye>
+                  <Eye
+                    size={20}
+                    className="font-extrabold text-neutral-950 w-5 h-5"
+                  ></Eye>
                 ) : (
-                  <EyeClosed className="font-extrabold text-neutral-950"></EyeClosed>
+                  <EyeClosed
+                    size={20}
+                    className="font-extrabold text-neutral-950"
+                  ></EyeClosed>
                 )}
               </InputGroupAddon>
             </InputGroup>
-            {errors.password && (
-              <span className="text-xs tracking-tight leading-6 text-[#ee1d52]">
-                {errors.password.type === "length"
-                  ? "Password must be at least 8 characters"
-                  : "This field is required"}
-              </span>
-            )}
           </Field>
+          {errors.password && (
+            <span className="text-xs text-[#ee1d52] h-6">
+              {errors.password.type === "length"
+                ? "Password must be at least 8 characters"
+                : "This field is required"}
+            </span>
+          )}
         </FieldContent>
         <FieldContent>
-          <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
+          <FieldLabel
+            htmlFor="confirm-password"
+            className="font-semibold text-sm w-full h-7"
+          >
+            Confirm Password
+          </FieldLabel>
           <Field>
             <InputGroup>
               <InputGroupInput
@@ -156,29 +199,29 @@ export default function RegisterForm() {
                 )}
               </InputGroupAddon>
             </InputGroup>
-            {errors.confirmPassword && (
-              <span className="text-xs tracking-tight leading-6 text-[#ee1d52]">
-                {errors.confirmPassword.type === "manual"
-                  ? errors.confirmPassword.message
-                  : "This field is required"}
-              </span>
-            )}
           </Field>
+          {errors.confirmPassword && (
+            <span className="text-xs text-[#ee1d52] h-6">
+              {errors.confirmPassword.type === "manual"
+                ? errors.confirmPassword.message
+                : "This field is required"}
+            </span>
+          )}
         </FieldContent>
       </FieldGroup>
-      <Button
-        type="submit"
-        className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
-        disabled={isPending}
-      >
+      <Button type="submit" disabled={isPending}>
         {isPending ? <Spinner /> : "Register"}
       </Button>
-      <p className="text-sm leading-7 tracking-tight text-neutral-950 text-center">
-        Already have an account?{" "}
-        <Link href="/login">
-          <span className="font-bold text-primary-300">Log In</span>
+      <div className="h-7 flex justify-center items-center gap-0.5">
+        <p className="text-sm text-neutral-950 text-center ">
+          Already have an account?{" "}
+        </p>
+        <Link href="/register" className="cursor-pointer">
+          <span className="text-sm font-bold text-primary-300 text-center">
+            Register
+          </span>
         </Link>
-      </p>
+      </div>
     </form>
   );
 }

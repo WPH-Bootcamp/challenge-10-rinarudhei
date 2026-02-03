@@ -28,11 +28,24 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<Inputs>();
   const [isEye, setIsEye] = useState(false);
   const { mutate, isPending } = useLogin();
 
   const onSubmit: SubmitHandler<Inputs> = ({ email, password }) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError(
+        "email",
+        {
+          message: "invalid email",
+          type: "manual",
+        },
+        { shouldFocus: true },
+      );
+      return;
+    }
     mutate({
       email,
       password,
@@ -60,14 +73,13 @@ export default function LoginForm() {
           <Field>
             <Input
               id="email"
-              type="email"
               placeholder="Enter your email"
               {...register("email", { required: true })}
             />
           </Field>
           {errors.email && (
             <span className="text-xs text-[#ee1d52] h-6">
-              This field is required
+              {`${errors.email.type === "manual" ? "Invalid email" : "This field is required"}`}
             </span>
           )}
         </FieldContent>
@@ -86,11 +98,7 @@ export default function LoginForm() {
                 placeholder="Enter your password"
                 {...register("password", { required: true })}
               />
-              <InputGroupAddon
-                align="inline-end"
-                onClick={toggleEye}
-                className="h-fit w-fit"
-              >
+              <InputGroupAddon align="inline-end" onClick={toggleEye}>
                 {isEye ? (
                   <Eye
                     size={20}
@@ -112,20 +120,18 @@ export default function LoginForm() {
           )}
         </FieldContent>
       </FieldGroup>
-      <Button
-        type="submit"
-        className="text-sm text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
-        disabled={isPending}
-      >
+      <Button type="submit" disabled={isPending}>
         {isPending ? <Spinner /> : "Login"}
       </Button>
       <div className="h-7 flex justify-center items-center gap-0.5">
         <p className="text-sm text-neutral-950 text-center ">
           Don&apos;t have an account?{" "}
-          <Link href="/register" className="cursor-pointer">
-            <span className="font-bold text-primary-300">Register</span>
-          </Link>
         </p>
+        <Link href="/register" className="cursor-pointer">
+          <span className="text-sm font-bold text-primary-300 text-center">
+            Register
+          </span>
+        </Link>
       </div>
     </form>
   );
