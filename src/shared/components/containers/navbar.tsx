@@ -47,7 +47,7 @@ export function Navbar() {
   };
 
   return (
-    <NavigationMenu className="min-w-80 max-w-360 mx-auto border-b border-neutral-300 border-box">
+    <NavigationMenu className="min-w-80 max-w-360 mx-auto border-b border-neutral-300 border-box fixed top-0 bg-white">
       <NavigationMenuList className="h-16 min-w-72 w-screen px-4 py-5 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-305">
         <NavigationMenuItem>
           <Link href="/">
@@ -58,7 +58,7 @@ export function Navbar() {
           <InputGroup className="flex h-12 rounded-xl py-2 px-3 lg:py-3 lg:px-4 bg-base-white justify-start items-center">
             <Search size={24} className="text-neutral-300" />
             <InputGroupInput
-              className="text-sm leading-7 md:text-base md:leading-7.5  tracking-tight text-neutral-600"
+              className="text-cs-sm md:text-cs-md  text-neutral-600"
               value={searchText}
               placeholder="Search"
               onChange={(e) => setSearchText(e.target.value)}
@@ -72,7 +72,7 @@ export function Navbar() {
               <NavigationMenuItem className="hidden sm:inline">
                 <Link
                   href="/login"
-                  className="text-primary-300 font-semibold underline text-sm leading-7 tracking-tight cursor-pointer flex gap-2"
+                  className="text-primary-300 font-semibold underline text-cs-sm leading-7 tracking-tight cursor-pointer flex gap-2"
                 >
                   <PenLine />
                   <span>Write Post</span>
@@ -88,12 +88,12 @@ export function Navbar() {
                       <Avatar className="w-10 h-10">
                         <AvatarImage src={data.avatarUrl} alt="user avatar" />
                         <AvatarFallback>
-                          <div className="rounded-full w-10 h-10 flex justify-center items-center border-2 border-neutral-500 text-lg md:text-xl lg:text-2xl text-neutral-500 bg-neutral-100">
+                          <div className="rounded-full w-10 h-10 flex justify-center items-center border-2 border-neutral-500 text-cs-lg md:text-cs-xl text-neutral-500 bg-neutral-100">
                             <p>{generateAvatarFallback(data.name)}</p>
                           </div>
                         </AvatarFallback>
                       </Avatar>
-                      <p className="hidden sm:inline text-neutral-950 text-sm leading-7">
+                      <p className="hidden sm:inline text-neutral-950 text-cs-sm leading-7">
                         {data.name}
                       </p>
                     </div>
@@ -101,7 +101,7 @@ export function Navbar() {
                   <PopoverContent className="border border-neutral-300 mt-2 mr-18.75 rounded-xl w-45.5 p-0 m-0">
                     <div className="flex gap-2 w-full h-full px-4 py-2">
                       <UserRound></UserRound>
-                      <p className="text-neutral-950 text-sm leading-7">
+                      <p className="text-neutral-950 text-cs-sm leading-7">
                         Profile
                       </p>
                     </div>
@@ -110,7 +110,7 @@ export function Navbar() {
                       onClick={logout}
                     >
                       <LogOut></LogOut>
-                      <p className="text-neutral-950 text-sm leading-7">
+                      <p className="text-neutral-950 text-cs-sm leading-7">
                         Logout
                       </p>
                     </div>
@@ -149,12 +149,12 @@ export function Navbar() {
                       <div className="flex flex-col justify-between items-center gap-4 w-53.5 mx-auto mt-9.75">
                         <Link
                           href="/login"
-                          className="text-primary-300 font-semibold underline text-sm leading-7 tracking-tight cursor-pointer"
+                          className="text-primary-300 font-semibold underline text-cs-sm leading-7 tracking-tight cursor-pointer"
                         >
                           Login
                         </Link>
                         <Button
-                          className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300 h-11 w-full cursor-pointer"
+                          className="text-cs-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300 h-11 w-full cursor-pointer"
                           onClick={handleClickRegister}
                         >
                           Register
@@ -169,13 +169,13 @@ export function Navbar() {
               <div className="flex items-center gap-6 h-full">
                 <Link
                   href="/login"
-                  className="text-primary-300 font-semibold underline text-sm leading-7 tracking-tight cursor-pointer"
+                  className="text-primary-300 font-semibold underline text-cs-sm leading-7 tracking-tight cursor-pointer"
                 >
                   Login
                 </Link>
                 <Separator orientation="vertical" className="h-full w-full" />
                 <Button
-                  className="text-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300 h-11 w-45.5 cursor-pointer"
+                  className="text-cs-sm leading-7 tracking-tight text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300 h-11 w-45.5 cursor-pointer"
                   onClick={handleClickRegister}
                 >
                   Register

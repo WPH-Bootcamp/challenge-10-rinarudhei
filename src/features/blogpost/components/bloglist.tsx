@@ -18,6 +18,7 @@ import { getRecommendedBlogs } from "../services/blogpostServices";
 import NotFound from "@/shared/components/containers/notfound";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Separator } from "@/shared/components/ui/separator";
 
 type BlogListProps = {
   query?: string | string[] | undefined;
@@ -59,7 +60,6 @@ export default function BlogList({ query }: BlogListProps) {
           {data.data.map((d, i) => (
             <React.Fragment key={i}>
               <BlogCard
-                key={i}
                 title={d.title}
                 author={d.author.name}
                 content={d.content}
@@ -69,6 +69,7 @@ export default function BlogList({ query }: BlogListProps) {
                 tags={d.tags}
                 createdAt={d.createdAt}
               ></BlogCard>
+              <Separator />
             </React.Fragment>
           ))}
           <Pagination>
@@ -79,9 +80,6 @@ export default function BlogList({ query }: BlogListProps) {
                     <PaginationPrevious
                       onClick={() => setNextPage(data.page - 1)}
                     />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationEllipsis />
                   </PaginationItem>
                   <PaginationItem>
                     <PaginationLink onClick={() => setNextPage(data.page - 1)}>
@@ -120,13 +118,15 @@ export default function BlogList({ query }: BlogListProps) {
         <div className="flex flex-col w-fit absolute top-3/10 md:top-2/5 gap-6 md:left-9/20 items-center justify-start">
           <NotFound />
           <div className="flex flex-col">
-            <h3 className="font-semibold text-sm text-center">
+            <h3 className="font-semibold text-cs-sm text-center">
               No results found
             </h3>
-            <p className="text-sm text-center">Try using different keywords</p>
+            <p className="text-cs-sm text-center">
+              Try using different keywords
+            </p>
           </div>
           <Button
-            className="text-sm text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
+            className="text-cs-sm text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
             onClick={() => router.push("/")}
           >
             Back to Home

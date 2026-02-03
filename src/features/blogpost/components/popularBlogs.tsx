@@ -3,6 +3,7 @@ import React from "react";
 import BlogCard from "./blogCard";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useGetPopularBlogs } from "../hooks/useBlogposts";
+import { Separator } from "@/shared/components/ui/separator";
 
 export default function PopularBlogs() {
   const { data, isError, isPending } = useGetPopularBlogs({
@@ -11,7 +12,7 @@ export default function PopularBlogs() {
   });
 
   return (
-    <div className="flex flex-col overflow-hidden lg:overflow-visible">
+    <div className="flex flex-col gap-4">
       {isError ? (
         <div className="flex justify-center items-center min-h-screen mx-auto">
           <div className="text-center text-red-600">
@@ -21,20 +22,19 @@ export default function PopularBlogs() {
       ) : isPending ? (
         <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : (
-        <div className="">
+        <>
           {data?.data.map((d, i, arr) => (
             <React.Fragment key={i}>
               <BlogCard
-                key={i}
                 title={d.title}
                 content={d.content}
                 comments={d.comments}
                 likes={d.likes}
-                isLast={arr.length === i + 1}
               ></BlogCard>
+              {i !== arr.length - 1 && <Separator />}
             </React.Fragment>
           ))}
-        </div>
+        </>
       )}
     </div>
   );

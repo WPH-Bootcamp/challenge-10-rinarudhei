@@ -92,14 +92,14 @@ export default function RegisterForm() {
       className="flex flex-col w-86.25 lg:w-100 h-fit rounded-xl outline p-6 gap-5 bg-white border-neutral-200 shadow-[0px_0px_24px_0px_#CDCCCC]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-xl h-8.5 font-bold text-neutral-950 w-full">
+      <h1 className="text-cs-xl h-8.5 font-bold text-neutral-950 w-full">
         Sign Up
       </h1>
       <FieldGroup>
         <FieldContent>
           <FieldLabel
             htmlFor="name"
-            className="font-semibold text-sm w-full h-7"
+            className="font-semibold text-cs-sm w-full h-7"
           >
             Name
           </FieldLabel>
@@ -112,7 +112,7 @@ export default function RegisterForm() {
             />
           </Field>
           {errors.name && (
-            <span className="text-xs text-[#ee1d52] h-6">
+            <span className="text-cs-xs text-[#ee1d52] h-6">
               This field is required
             </span>
           )}
@@ -120,7 +120,7 @@ export default function RegisterForm() {
         <FieldContent>
           <FieldLabel
             htmlFor="email"
-            className="font-semibold text-sm w-full h-7"
+            className="font-semibold text-cs-sm w-full h-7"
           >
             Email
           </FieldLabel>
@@ -133,7 +133,7 @@ export default function RegisterForm() {
             />
           </Field>
           {errors.email && (
-            <span className="text-xs leading-6 text-[#ee1d52] h-6">
+            <span className="text-cs-xs leading-6 text-[#ee1d52] h-6">
               {`${errors.email.type === "manual" ? "Invalid email" : "This field is required"}`}
             </span>
           )}
@@ -141,7 +141,7 @@ export default function RegisterForm() {
         <FieldContent>
           <FieldLabel
             htmlFor="password"
-            className="font-semibold text-sm w-full h-7"
+            className="font-semibold text-cs-sm w-full h-7"
           >
             Password
           </FieldLabel>
@@ -169,7 +169,7 @@ export default function RegisterForm() {
             </InputGroup>
           </Field>
           {errors.password && (
-            <span className="text-xs text-[#ee1d52] h-6">
+            <span className="text-cs-xs text-[#ee1d52] h-6">
               {errors.password.type === "length"
                 ? "Password must be at least 8 characters"
                 : "This field is required"}
@@ -179,7 +179,7 @@ export default function RegisterForm() {
         <FieldContent>
           <FieldLabel
             htmlFor="confirm-password"
-            className="font-semibold text-sm w-full h-7"
+            className="font-semibold text-cs-sm w-full h-7"
           >
             Confirm Password
           </FieldLabel>
@@ -201,7 +201,7 @@ export default function RegisterForm() {
             </InputGroup>
           </Field>
           {errors.confirmPassword && (
-            <span className="text-xs text-[#ee1d52] h-6">
+            <span className="text-cs-xs text-[#ee1d52] h-6">
               {errors.confirmPassword.type === "manual"
                 ? errors.confirmPassword.message
                 : "This field is required"}
@@ -213,11 +213,11 @@ export default function RegisterForm() {
         {isPending ? <Spinner /> : "Register"}
       </Button>
       <div className="h-7 flex justify-center items-center gap-0.5">
-        <p className="text-sm text-neutral-950 text-center ">
+        <p className="text-cs-sm text-neutral-950 text-center ">
           Already have an account?{" "}
         </p>
         <Link href="/register" className="cursor-pointer">
-          <span className="text-sm font-bold text-primary-300 text-center">
+          <span className="text-cs-sm font-bold text-primary-300 text-center">
             Register
           </span>
         </Link>

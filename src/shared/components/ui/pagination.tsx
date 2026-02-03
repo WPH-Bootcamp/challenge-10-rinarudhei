@@ -58,8 +58,8 @@ function PaginationLink({
           variant: isActive ? "default" : "ghost",
           size,
         }),
-        className +
-          `${isActive && " bg-primary-300 text-neutral-25"} rounded-full`,
+        (className || "") +
+          ` ${isActive && " bg-primary-300 text-neutral-25"} text-xs rounded-full font-normal`,
       )}
       {...props}
     />
@@ -78,7 +78,7 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
+      <span className="text-xs text-neutral-900">Previous</span>
     </PaginationLink>
   );
 }
@@ -94,7 +94,7 @@ function PaginationNext({
       className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
+      <span className="text-xs text-neutral-900">Next</span>
       <ChevronRightIcon />
     </PaginationLink>
   );

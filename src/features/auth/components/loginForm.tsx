@@ -66,7 +66,7 @@ export default function LoginForm() {
         <FieldContent>
           <FieldLabel
             htmlFor="email"
-            className="font-semibold text-sm w-full h-7"
+            className="font-semibold text-cs-sm w-full h-7"
           >
             Email
           </FieldLabel>
@@ -86,7 +86,7 @@ export default function LoginForm() {
         <FieldContent>
           <FieldLabel
             htmlFor="password"
-            className="font-semibold text-sm w-full h-7"
+            className="font-semibold text-cs-sm w-full h-7"
           >
             Password
           </FieldLabel>
@@ -124,11 +124,11 @@ export default function LoginForm() {
         {isPending ? <Spinner /> : "Login"}
       </Button>
       <div className="h-7 flex justify-center items-center gap-0.5">
-        <p className="text-sm text-neutral-950 text-center ">
+        <p className="text-cs-sm text-neutral-950 text-center ">
           Don&apos;t have an account?{" "}
         </p>
         <Link href="/register" className="cursor-pointer">
-          <span className="text-sm font-bold text-primary-300 text-center">
+          <span className="text-cs-sm font-bold text-primary-300 text-center">
             Register
           </span>
         </Link>
