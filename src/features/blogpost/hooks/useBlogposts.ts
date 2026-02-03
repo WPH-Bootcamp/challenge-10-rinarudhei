@@ -1,6 +1,7 @@
 import { PaginationParam, PaginationResponse } from "@/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
+  getBlogDetail,
   getPopularBlogs,
   getRecommendedBlogs,
 } from "../services/blogpostServices";
@@ -24,6 +25,15 @@ export function useGetPopularBlogs(params: PaginationParam) {
     queryKey: ["popular-blogs", params.page, params.limit],
     placeholderData: keepPreviousData,
     queryFn: () => getPopularBlogs(params),
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useGetBlogDetail(params: { id: string }) {
+  return useQuery<BlogPost>({
+    queryKey: ["detail-blog", params.id],
+    placeholderData: keepPreviousData,
+    queryFn: () => getBlogDetail(params),
     staleTime: 1000 * 60 * 5,
   });
 }

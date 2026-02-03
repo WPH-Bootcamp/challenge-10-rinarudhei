@@ -1,6 +1,6 @@
 import { Separator } from "@/shared/components/ui/separator";
-import BlogList from "./bloglist";
-import PopularBlogs from "./popularBlogs";
+import BlogList from "../../../features/blogpost/components/bloglist";
+import PopularBlogs from "../../../features/blogpost/components/popularBlogs";
 
 type HomeContentProps = {
   searchParams: { [key: string]: string | string[] | undefined };

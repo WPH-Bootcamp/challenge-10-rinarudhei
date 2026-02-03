@@ -1,4 +1,4 @@
-import HomeContent from "@/features/blogpost/components/home";
+import HomeContent from "@/app/(home)/partials/home";
 import Footer from "@/shared/components/containers/footer";
 import { Navbar } from "@/shared/components/containers/navbar";
 

@@ -27,17 +27,6 @@ export default function BlogList({ query }: BlogListProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [nextPage, setNextPage] = useState(1);
-  const [currentQuery, setCurrentQuery] = useState("");
-  if (currentQuery !== query) {
-    setNextPage(1);
-    let queryString = "";
-    if (Array.isArray(query)) {
-      queryString = query.join("");
-    } else {
-      queryString = query || "";
-    }
-    setCurrentQuery(queryString);
-  }
 
   const { data, isPending, isError, isPlaceholderData } =
     useGetRecommendedBlogs(
@@ -47,6 +36,7 @@ export default function BlogList({ query }: BlogListProps) {
       },
       query,
     );
+
   useEffect(() => {
     if (!isPlaceholderData && data && data.page < data.lastPage) {
       queryClient.prefetchQuery({
@@ -55,7 +45,7 @@ export default function BlogList({ query }: BlogListProps) {
           getRecommendedBlogs({ page: data.page + 1, limit: 5 }, query),
       });
     }
-  }, [data, isPlaceholderData, nextPage, queryClient, query]);
+  }, [data, isPlaceholderData, queryClient, query, setNextPage]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -69,6 +59,7 @@ export default function BlogList({ query }: BlogListProps) {
         <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : data?.data.length > 0 ? (
         <div className="flex flex-col gap-4 w-full">
+          <input onChange={() => setNextPage(1)} value={query || ""} hidden />
           {data.data.map((d, i) => (
             <React.Fragment key={i}>
               <BlogCard

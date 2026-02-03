@@ -15,6 +15,10 @@ export async function getPopularBlogs(
   );
 }
 
+export async function getBlogDetail(params: { id: string }): Promise<BlogPost> {
+  return await apiGet<BlogPost>(`/posts/${params.id}`);
+}
+
 export async function getRecommendedBlogs(
   params: PaginationParam,
   query?: string | string[] | undefined,
