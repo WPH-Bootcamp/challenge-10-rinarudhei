@@ -7,6 +7,6 @@ export function useGetMe() {
   return useQuery<UserMe | null, ApiError>({
     queryKey: ["user-me"],
     queryFn: getUserMe,
-    staleTime: 1000 * 3600 * 24,
+    staleTime: 1000 * 60 * 5,
   });
 }

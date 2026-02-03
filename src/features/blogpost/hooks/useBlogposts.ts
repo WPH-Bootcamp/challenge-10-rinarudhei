@@ -15,7 +15,7 @@ export function useGetRecommendedBlogs(
     queryKey: ["recommended-blogs", params.page, params.limit, query],
     queryFn: () => getRecommendedBlogs(params, query),
     placeholderData: keepPreviousData,
-    staleTime: 1000 * 3600 * 24,
+    staleTime: 1000 * 60 * 5,
   });
 }
 
@@ -24,6 +24,6 @@ export function useGetPopularBlogs(params: PaginationParam) {
     queryKey: ["popular-blogs", params.page, params.limit],
     placeholderData: keepPreviousData,
     queryFn: () => getPopularBlogs(params),
-    staleTime: 1000 * 3600 * 24,
+    staleTime: 1000 * 60 * 5,
   });
 }

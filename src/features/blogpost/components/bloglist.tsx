@@ -27,6 +27,18 @@ export default function BlogList({ query }: BlogListProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [nextPage, setNextPage] = useState(1);
+  const [currentQuery, setCurrentQuery] = useState("");
+  if (currentQuery !== query) {
+    setNextPage(1);
+    let queryString = "";
+    if (Array.isArray(query)) {
+      queryString = query.join("");
+    } else {
+      queryString = query || "";
+    }
+    setCurrentQuery(queryString);
+  }
+
   const { data, isPending, isError, isPlaceholderData } =
     useGetRecommendedBlogs(
       {
