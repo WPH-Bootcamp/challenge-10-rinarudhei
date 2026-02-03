@@ -129,10 +129,7 @@ export default function BlogList({ query }: BlogListProps) {
               Try using different keywords
             </p>
           </div>
-          <Button
-            className="text-cs-sm text-neutral-25 font-semibold gap-2 p-2 rounded-full bg-primary-300"
-            onClick={() => router.push("/")}
-          >
+          <Button className="w-full" onClick={() => router.push("/")}>
             Back to Home
           </Button>
         </div>
