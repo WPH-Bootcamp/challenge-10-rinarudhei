@@ -8,7 +8,7 @@ export function useLikeBlogpost() {
   return useMutation({
     onMutate: likeBlogpost,
     onError: () => {
-      toast.error("Failed to add comment");
+      toast.error("Failed to like blog");
     },
     onSuccess: async () => {
       await Promise.all([

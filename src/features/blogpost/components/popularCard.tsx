@@ -33,11 +33,11 @@ export default function PopularCard({
         </article>
       </CardContent>
       <div className="grid grid-cols-3 h-7 gap-3 lg:gap-5 w-37.25 items-center">
-        <div className="gap-1.5 flex">
+        <div className="gap-1.5 flex items-center">
           <ThumbsUp size={20} />
           <p className="text-neutral-600 text-cs-xs lg:text-cs-sm">{likes}</p>
         </div>
-        <div className="gap-1.5 flex">
+        <div className="gap-1.5 flex items-center">
           <MessageSquare size={20} />
           <p className="text-neutral-600 text-cs-xs lg:text-cs-sm">
             {comments}

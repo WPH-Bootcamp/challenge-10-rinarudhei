@@ -7,8 +7,12 @@ export function useAddComment() {
 
   return useMutation({
     mutationFn: addComment,
-    onError: () => {
-      toast.error("Failed to add comment");
+    onError: (e) => {
+      if (e.message === "Unauthorized") {
+        toast.error("Please login to add a comment");
+      } else {
+        toast.error("Failed to add comment");
+      }
     },
     onSuccess: async () => {
       await Promise.all([

@@ -38,6 +38,7 @@ export default function BlogCard({
   comments,
   imageUrl,
   username,
+  avatar,
 }: BlogCardProps) {
   return (
     <div className="flex gap-6 justify-start">
@@ -72,7 +73,7 @@ export default function BlogCard({
         <div className="flex gap-3 justify-start items-center">
           <div className="flex gap-2 justify-start items-center">
             <Avatar className="w-7.5 h-7.5 lg:w-10 lg:h-10">
-              <AvatarImage sizes="30 30" src={author} alt="author avatar" />
+              <AvatarImage sizes="30 30" src={avatar} alt="author avatar" />
               <AvatarFallback className="rounded-full w-7.5 h-7.5 lg:w-10 lg:h-10 flex justify-center items-center border-2 border-neutral-500 text-cs-md lg:text-cs-xl text-neutral-500 bg-neutral-100">
                 <p>{generateAvatarFallback(author || "XX")}</p>
               </AvatarFallback>
@@ -87,11 +88,11 @@ export default function BlogCard({
           </p>
         </div>
         <CardFooter>
-          <div className="gap-1.5 flex">
+          <div className="gap-1.5 flex items-center">
             <ThumbsUp size={20} />
             <p className="text-neutral-600 text-cs-xs lg:text-cs-sm">{likes}</p>
           </div>
-          <div className="gap-1.5 flex">
+          <div className="gap-1.5 flex items-center">
             <MessageSquare size={20} />
             <p className="text-neutral-660 text-cs-xs lg:text-cs-sm">
               {comments}

@@ -20,6 +20,7 @@ import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Separator } from "@/shared/components/ui/separator";
 import Link from "next/link";
+import { Input } from "@/shared/components/ui/input";
 
 type BlogListProps = {
   query?: string | string[] | undefined;
@@ -60,7 +61,13 @@ export default function BlogList({ query }: BlogListProps) {
         <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : data?.data.length > 0 ? (
         <div className="flex flex-col gap-4 w-full">
-          <input onChange={() => setNextPage(1)} value={query || ""} hidden />
+          <Input
+            id="page-refresher"
+            name="page-refresher"
+            onChange={() => setNextPage(1)}
+            value={query || ""}
+            hidden
+          />
           {data.data.map((d, i) => (
             <React.Fragment key={i}>
               <Link href={`/detail/${d.id}`}>

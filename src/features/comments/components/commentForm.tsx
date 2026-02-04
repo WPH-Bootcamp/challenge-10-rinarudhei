@@ -1,3 +1,4 @@
+"use client";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { useGetComments } from "../hooks/commentHooks";
 import { generateAvatarFallback } from "@/shared/lib/utils";
@@ -6,8 +7,10 @@ import { Field, FieldTitle } from "@/shared/components/ui/field";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { Button } from "@/shared/components/ui/button";
 import { Separator } from "@/shared/components/ui/separator";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import dayjs from "dayjs";
+import { useAddComment } from "../hooks/commentMutationHooks";
+import { useRouter } from "next/navigation";
 
 type CommentForm = {
   postId: number;
@@ -24,6 +27,12 @@ export default function CommentForm({
   meUserName,
 }: CommentForm) {
   const { data, isPending, isError } = useGetComments({ postId });
+  const [commentText, setCommentText] = React.useState("");
+  const { mutate, isPending: isPendingComment } = useAddComment();
+  const handleSubmitComment = () => {
+    mutate({ content: commentText, postId });
+  };
+
   return (
     <div className="flex flex-col gap-3">
       {isError ? (
@@ -65,12 +74,22 @@ export default function CommentForm({
             <Textarea
               className="text-neutral-950 h-11xl w-full"
               placeholder="Enter your comment"
+              value={commentText}
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                setCommentText(event.target.value)
+              }
             ></Textarea>
           </Field>
-          <Button className="md:w-51 md:self-end">Send</Button>
+          <Button
+            className="md:w-51 md:self-end"
+            onClick={handleSubmitComment}
+            disabled={isPendingComment}
+          >
+            {isPendingComment ? <Spinner /> : "Submit"}
+          </Button>
           <div className="flex flex-col gap-3">
             {data
-              .reverse()
+              .sort((a, b) => b.id - a.id)
               .slice(0, 3)
               .map((cm, i) => (
                 <React.Fragment key={i}>

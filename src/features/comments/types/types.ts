@@ -13,5 +13,4 @@ export type Comment = {
 export type AddCommentRequest = {
   postId: number;
   content: string;
-  token: string;
 };

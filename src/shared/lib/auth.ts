@@ -75,5 +75,5 @@ export function getStoredUser(): UserMe | null {
 }
 
 export function isAuthenticated() {
-  return getToken() !== null;
+  return getTokenFromCookies() !== null;
 }

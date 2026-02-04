@@ -1,9 +1,13 @@
 import { apiGet } from "@/shared/lib/api";
-import { getStoredUser, getToken, saveUser } from "@/shared/lib/auth";
+import {
+  getStoredUser,
+  getTokenFromCookies,
+  saveUser,
+} from "@/shared/lib/auth";
 import { UserMe } from "../types/user";
 
 export async function getUserMe(): Promise<UserMe | null> {
-  const token = await getToken();
+  const token = await getTokenFromCookies();
   if (!token) {
     return null;
   }
