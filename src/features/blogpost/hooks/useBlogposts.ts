@@ -2,6 +2,7 @@ import { PaginationParam, PaginationResponse } from "@/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   getBlogDetail,
+  getLikesByPostId,
   getOtherBlogByUserId,
   getPopularBlogs,
   getRecommendedBlogs,
@@ -26,6 +27,15 @@ export function useGetPopularBlogs(params: PaginationParam) {
     queryKey: ["popular-blogs", params.page, params.limit],
     placeholderData: keepPreviousData,
     queryFn: () => getPopularBlogs(params),
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useGetLikesByPostId(params: { postId: number }) {
+  return useQuery({
+    queryKey: ["likes", params.postId],
+    placeholderData: keepPreviousData,
+    queryFn: () => getLikesByPostId({ id: params.postId }),
     staleTime: 1000 * 60 * 5,
   });
 }

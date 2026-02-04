@@ -8,11 +8,22 @@ import { Button } from "@/shared/components/ui/button";
 import { Separator } from "@/shared/components/ui/separator";
 import React from "react";
 import dayjs from "dayjs";
-import { useGetMe } from "@/features/user/hooks/useGetMe";
 
-export default function CommentForm({ postId }: { postId: number }) {
+type CommentForm = {
+  postId: number;
+  mePending: boolean;
+  meName: string | undefined;
+  meAvatar: string | undefined;
+  meUserName: string | undefined;
+};
+export default function CommentForm({
+  postId,
+  mePending,
+  meName,
+  meAvatar,
+  meUserName,
+}: CommentForm) {
   const { data, isPending, isError } = useGetComments({ postId });
-  const { data: meData, isPending: mePending } = useGetMe();
   return (
     <div className="flex flex-col gap-3">
       {isError ? (
@@ -36,15 +47,15 @@ export default function CommentForm({ postId }: { postId: number }) {
                 <Avatar className="w-10 h-10">
                   <AvatarImage
                     sizes="40 40"
-                    src={meData?.avatarUrl}
+                    src={meAvatar || ""}
                     alt="current user avatar"
                   />
                   <AvatarFallback className="rounded-full w-10 h-10 flex justify-center items-center border-2 border-neutral-500 text-cs-md lg:text-cs-xl text-neutral-500 bg-neutral-100">
-                    <p>{generateAvatarFallback(meData?.name || "XX")}</p>
+                    <p>{generateAvatarFallback(meName || "XX")}</p>
                   </AvatarFallback>
                 </Avatar>
                 <p className="text-neutral-900 text-cs-xs lg:text-cs-sm font-medium">
-                  {meData?.username || ""}
+                  {meUserName || ""}
                 </p>
               </>
             )}

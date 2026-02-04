@@ -19,3 +19,10 @@ export type Author = {
   avatarUrl: string;
   avatarPublicId: string;
 };
+
+export type Like = {
+  id: number;
+  name: string;
+  headline: string;
+  avatarUrl: string;
+};

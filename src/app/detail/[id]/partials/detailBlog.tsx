@@ -1,7 +1,10 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useGetBlogDetail } from "../../../../features/blogpost/hooks/useBlogposts";
+import {
+  useGetBlogDetail,
+  useGetLikesByPostId,
+} from "../../../../features/blogpost/hooks/useBlogposts";
 import { Spinner } from "@/shared/components/ui/spinner";
 import { Badge } from "@/shared/components/ui/badge";
 import {
@@ -16,10 +19,15 @@ import { Separator } from "@/shared/components/ui/separator";
 import Image from "next/image";
 import CommentSection from "@/features/comments/components/commentForm";
 import OtherBlogs from "@/features/blogpost/components/otherBlogs";
+import { useGetMe } from "@/features/user/hooks/useGetMe";
 
 export default function DetailBlogContent() {
   const params = useParams<{ id: string }>();
   const { data, isPending, isError } = useGetBlogDetail({ id: params.id });
+  const { data: meData, isPending: mePending } = useGetMe();
+  const { data: likeData, isPending: likeIsPending } = useGetLikesByPostId({
+    postId: Number(params.id),
+  });
 
   return (
     <div className="mx-auto mt-16 gap-3 p-4 sm:mt-24 md:mt-28 lg:mt-32 lg:p-0 lg:gap-4 xs:max-w-98.25 sm:max-w-120 md:max-w-150 lg:max-w-200">
@@ -80,7 +88,14 @@ export default function DetailBlogContent() {
 
             <div className="flex gap-3">
               <div className="gap-1.5 flex">
-                <ThumbsUp size={20} />
+                {likeIsPending || mePending ? (
+                  <Spinner />
+                ) : (
+                  <ThumbsUp
+                    size={20}
+                    className={`${likeData?.some((l) => l.id === meData?.id) ? "fill-primary-300 stroke-white stroke-1" : ""}`}
+                  />
+                )}
                 <p className="text-neutral-600 text-cs-xs lg:text-cs-sm">
                   {data.likes}
                 </p>
@@ -109,7 +124,13 @@ export default function DetailBlogContent() {
             <div className="flex flex-col">{data.content}</div>
 
             <Separator />
-            <CommentSection postId={data.id} />
+            <CommentSection
+              postId={data.id}
+              mePending={mePending}
+              meAvatar={meData?.avatarUrl}
+              meUserName={meData?.username}
+              meName={meData?.name}
+            />
             <Separator />
             <OtherBlogs authorId={data.author.id} currentBlogId={data.id} />
           </div>
