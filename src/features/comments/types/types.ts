@@ -9,3 +9,9 @@ export type Comment = {
   };
   createdAt: string;
 };
+
+export type AddCommentRequest = {
+  postId: number;
+  content: string;
+  token: string;
+};

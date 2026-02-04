@@ -94,25 +94,30 @@ export async function apiGet<T>(
   return data;
 }
 
-export async function apiPost<T, V>(
-  endpoint: string,
-  body: V,
-  token?: string,
-): Promise<T> {
+type apiParams<V> = {
+  endpoint: string;
+  body?: V;
+  token?: string;
+};
+export async function apiPost<T, V>({
+  endpoint,
+  body,
+  token,
+}: apiParams<V>): Promise<T> {
   const data = await fetchAPI<T>(endpoint, {
     method: HTTP_METHODS[3],
-    body: JSON.stringify(body),
+    body: body && JSON.stringify(body),
     token,
   });
 
   return data;
 }
 
-export async function apiPut<T, V>(
-  endpoint: string,
-  body: V,
-  token?: string,
-): Promise<T> {
+export async function apiPut<T, V>({
+  endpoint,
+  body,
+  token,
+}: apiParams<V>): Promise<T> {
   const data = await fetchAPI<T>(endpoint, {
     method: HTTP_METHODS[4],
     body: JSON.stringify(body),
@@ -122,10 +127,13 @@ export async function apiPut<T, V>(
   return data;
 }
 
-export async function apiDelete<T>(
-  endpoint: string,
-  token?: string,
-): Promise<T> {
+export async function apiDelete<T>({
+  endpoint,
+  token,
+}: {
+  endpoint: string;
+  token?: string;
+}): Promise<T> {
   const data = await fetchAPI<T>(endpoint, {
     method: HTTP_METHODS[4],
     token,

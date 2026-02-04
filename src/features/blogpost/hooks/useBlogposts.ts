@@ -5,7 +5,7 @@ import {
   getOtherBlogByUserId,
   getPopularBlogs,
   getRecommendedBlogs,
-} from "../services/blogpostServices";
+} from "../services/blogGetServices";
 import { BlogPost } from "../types/blogpost";
 import { ApiError } from "@/shared/lib/api";
 

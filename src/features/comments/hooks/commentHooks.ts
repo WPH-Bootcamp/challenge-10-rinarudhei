@@ -6,6 +6,6 @@ export function useGetComments(params: { postId: number }) {
     queryKey: ["comments", params.postId],
     staleTime: 1000 * 60 * 5,
     placeholderData: keepPreviousData,
-    queryFn: () => getComments(params),
+    queryFn: async () => await getComments(params),
   });
 }

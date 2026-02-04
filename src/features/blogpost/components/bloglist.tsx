@@ -14,7 +14,7 @@ import {
 } from "@/shared/components/ui/pagination";
 import React, { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { getRecommendedBlogs } from "../services/blogpostServices";
+import { getRecommendedBlogs } from "../services/blogGetServices";
 import NotFound from "@/shared/components/containers/notfound";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
