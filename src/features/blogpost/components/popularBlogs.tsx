@@ -4,6 +4,7 @@ import { Spinner } from "@/shared/components/ui/spinner";
 import { useGetPopularBlogs } from "../hooks/useBlogposts";
 import { Separator } from "@/shared/components/ui/separator";
 import PopularCard from "./popularCard";
+import Link from "next/link";
 
 export default function PopularBlogs() {
   const { data, isError, isPending } = useGetPopularBlogs({
@@ -25,12 +26,14 @@ export default function PopularBlogs() {
         <>
           {data?.data.map((d, i, arr) => (
             <React.Fragment key={i}>
-              <PopularCard
-                title={d.title}
-                content={d.content}
-                comments={d.comments}
-                likes={d.likes}
-              ></PopularCard>
+              <Link href={`/detail/${d.id}`}>
+                <PopularCard
+                  title={d.title}
+                  content={d.content}
+                  comments={d.comments}
+                  likes={d.likes}
+                ></PopularCard>
+              </Link>
               {i !== arr.length - 1 && <Separator />}
             </React.Fragment>
           ))}

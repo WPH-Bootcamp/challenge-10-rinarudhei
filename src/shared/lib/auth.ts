@@ -1,3 +1,4 @@
+import { UserMe } from "@/features/user/types/user";
 import {
   AUTH_COOKIE_TOKEN_KEY,
   AUTH_TOKEN_KEY,
@@ -7,12 +8,6 @@ import {
 /* 
   Provide functions for authentication
 */
-
-export type StoredUser = {
-  id: number;
-  name: string;
-  email: string;
-};
 
 export async function saveToken(token: string) {
   if (typeof window === undefined) return;
@@ -57,13 +52,13 @@ export async function getTokenFromCookies(): Promise<string | null> {
   return null;
 }
 
-export function saveUser(user: StoredUser) {
+export function saveUser(user: UserMe) {
   if (typeof window === undefined) return;
 
   localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
 }
 
-export function getStoredUser(): StoredUser | null {
+export function getStoredUser(): UserMe | null {
   if (typeof window === undefined) return null;
 
   const userString = localStorage.getItem(AUTH_USER_KEY);

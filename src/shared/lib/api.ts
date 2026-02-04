@@ -13,7 +13,7 @@ type FetchOptions = RequestInit & {
   token?: string | null;
 };
 
-class ApiError extends Error {
+export class ApiError extends Error {
   constructor(
     public message: string,
     public code: number,

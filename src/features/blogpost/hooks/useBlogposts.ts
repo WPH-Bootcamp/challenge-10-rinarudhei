@@ -6,7 +6,7 @@ import {
   getRecommendedBlogs,
 } from "../services/blogpostServices";
 import { BlogPost } from "../types/blogpost";
-import { ApiError } from "next/dist/server/api-utils";
+import { ApiError } from "@/shared/lib/api";
 
 export function useGetRecommendedBlogs(
   params: PaginationParam,
@@ -30,7 +30,7 @@ export function useGetPopularBlogs(params: PaginationParam) {
 }
 
 export function useGetBlogDetail(params: { id: string }) {
-  return useQuery<BlogPost>({
+  return useQuery<BlogPost, ApiError>({
     queryKey: ["detail-blog", params.id],
     placeholderData: keepPreviousData,
     queryFn: () => getBlogDetail(params),

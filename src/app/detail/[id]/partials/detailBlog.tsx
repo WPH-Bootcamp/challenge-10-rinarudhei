@@ -13,6 +13,8 @@ import { generateAvatarFallback } from "@/shared/lib/utils";
 import dayjs from "dayjs";
 import { Dot, MessageSquare, ThumbsUp } from "lucide-react";
 import { Separator } from "@/shared/components/ui/separator";
+import Image from "next/image";
+import CommentSection from "@/features/comments/components/commentForm";
 
 export default function DetailBlogContent() {
   const params = useParams<{ id: string }>();
@@ -30,8 +32,8 @@ export default function DetailBlogContent() {
         <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : (
         data && (
-          // Header
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 lg:gap-4">
+            {/* Header */}
             <div className="flex flex-col gap-3">
               <h1 className="text-display-sm text-neutral-900 lg:text-display-lg font-bold">
                 {data.title}
@@ -54,7 +56,11 @@ export default function DetailBlogContent() {
             <div className="flex gap-3 justify-start items-center">
               <div className="flex gap-2 justify-start items-center">
                 <Avatar className="w-10 h-10">
-                  <AvatarImage sizes="40 40" src={""} alt="" />
+                  <AvatarImage
+                    sizes="40 40"
+                    src={data.author.avatarUrl}
+                    alt="author avatar"
+                  />
                   <AvatarFallback className="rounded-full w-10 h-10 flex justify-center items-center border-2 border-neutral-500 text-cs-md lg:text-cs-xl text-neutral-500 bg-neutral-100">
                     <p>{generateAvatarFallback(data.author.name || "XX")}</p>
                   </AvatarFallback>
@@ -68,7 +74,9 @@ export default function DetailBlogContent() {
                 {dayjs(data.createdAt).format("DD MMMM YYYY")}
               </p>
             </div>
+
             <Separator />
+
             <div className="flex gap-3">
               <div className="gap-1.5 flex">
                 <ThumbsUp size={20} />
@@ -83,7 +91,24 @@ export default function DetailBlogContent() {
                 </p>
               </div>
             </div>
+
             <Separator />
+
+            {/* Detail Content */}
+            <div className="rounded-sm w-full max-w-89.75 h-50.75 md:max-w-full md:w-120 md:h-80 lg:w-180 lg:h-132 xl:w-200 xl:h-151.75 relative mx-auto z-40">
+              <Image
+                src={data.imageUrl as string}
+                alt="blog post image"
+                fill
+                placeholder="empty"
+                className="rounded-sm"
+              />
+            </div>
+
+            <div className="flex flex-col">{data.content}</div>
+
+            <Separator />
+            <CommentSection postId={data.id} />
           </div>
         )
       )}

@@ -10,9 +10,12 @@ export type BlogPost = {
   comments: number;
 };
 
-type Author = {
+export type Author = {
   id: number;
   name: string;
   username: string;
   email: string;
+  headline: string;
+  avatarUrl: string;
+  avatarPublicId: string;
 };

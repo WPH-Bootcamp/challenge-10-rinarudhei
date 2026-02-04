@@ -39,12 +39,13 @@ export default function BlogCard({
 }: BlogCardProps) {
   return (
     <div className="flex gap-6 justify-start">
-      <div className="w-60 lg:w-76 xl:w-85 h-64.5 hidden md:block relative my-2.25">
+      <div className="w-60 lg:w-76 xl:w-85 h-64.5 hidden md:block relative my-2.25 rounded-sm">
         <Image
           src={imageUrl as string}
           alt="blog post image"
           fill
           placeholder="empty"
+          className="rounded-sm"
         />
       </div>
       <Card className="h-full gap-3 lg:gap-4">
@@ -69,7 +70,7 @@ export default function BlogCard({
         <div className="flex gap-3 justify-start items-center">
           <div className="flex gap-2 justify-start items-center">
             <Avatar className="w-7.5 h-7.5 lg:w-10 lg:h-10">
-              <AvatarImage sizes="30 30" src={""} alt="" />
+              <AvatarImage sizes="30 30" src={author} alt="author avatar" />
               <AvatarFallback className="rounded-full w-7.5 h-7.5 lg:w-10 lg:h-10 flex justify-center items-center border-2 border-neutral-500 text-cs-md lg:text-cs-xl text-neutral-500 bg-neutral-100">
                 <p>{generateAvatarFallback(author || "XX")}</p>
               </AvatarFallback>

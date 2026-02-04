@@ -19,6 +19,7 @@ import NotFound from "@/shared/components/containers/notfound";
 import { Button } from "@/shared/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Separator } from "@/shared/components/ui/separator";
+import Link from "next/link";
 
 type BlogListProps = {
   query?: string | string[] | undefined;
@@ -62,16 +63,19 @@ export default function BlogList({ query }: BlogListProps) {
           <input onChange={() => setNextPage(1)} value={query || ""} hidden />
           {data.data.map((d, i) => (
             <React.Fragment key={i}>
-              <BlogCard
-                title={d.title}
-                author={d.author.name}
-                content={d.content}
-                comments={d.comments}
-                likes={d.likes}
-                imageUrl={d.imageUrl}
-                tags={d.tags}
-                createdAt={d.createdAt}
-              ></BlogCard>
+              <Link href={`/detail/${d.id}`}>
+                <BlogCard
+                  title={d.title}
+                  author={d.author.name}
+                  content={d.content}
+                  comments={d.comments}
+                  likes={d.likes}
+                  imageUrl={d.imageUrl}
+                  tags={d.tags}
+                  createdAt={d.createdAt}
+                  avatar={d.author.avatarUrl}
+                ></BlogCard>
+              </Link>
               <Separator />
             </React.Fragment>
           ))}

@@ -4,7 +4,7 @@ import { Navbar } from "@/shared/components/containers/navbar";
 
 export default function DetailPage() {
   return (
-    <div>
+    <div className="w-screen flex flex-col justify-center items-center">
       <Navbar />
       <DetailBlogContent />
       <Footer />

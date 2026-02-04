@@ -47,8 +47,8 @@ export function Navbar() {
   };
 
   return (
-    <NavigationMenu className="min-w-80 max-w-360 mx-auto border-b border-neutral-300 border-box fixed top-0 bg-white w-screen">
-      <NavigationMenuList className="h-16 min-w-72 w-screen px-4 py-5 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-300 mx-auto">
+    <NavigationMenu className=" border-b border-neutral-300 fixed top-0 bg-white z-50">
+      <NavigationMenuList className="h-16 min-w-72 w-screen px-4 py-5 sm:max-w-150 md:max-w-175 lg:max-w-231 xl:max-w-300 ">
         <NavigationMenuItem>
           <Link href="/">
             <Logo />
@@ -86,7 +86,10 @@ export function Navbar() {
                   <PopoverTrigger>
                     <div className="flex gap-4 items-center cursor-pointer">
                       <Avatar className="w-10 h-10">
-                        <AvatarImage src={data.avatarUrl} alt="user avatar" />
+                        <AvatarImage
+                          src={data.avatarUrl}
+                          alt="current user avatar"
+                        />
                         <AvatarFallback>
                           <div className="rounded-full w-10 h-10 flex justify-center items-center border-2 border-neutral-500 text-cs-lg md:text-cs-xl text-neutral-500 bg-neutral-100">
                             <p>{generateAvatarFallback(data.name)}</p>

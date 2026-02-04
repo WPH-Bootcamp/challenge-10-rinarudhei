@@ -7,6 +7,7 @@ export type UserMe = {
   email: string;
   headline: string;
   avatarUrl: string;
+  username: string;
 };
 
 export type UserDetail = Omit<UserMe, "email"> & {
