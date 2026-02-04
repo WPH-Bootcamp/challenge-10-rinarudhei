@@ -15,6 +15,25 @@ export async function getPopularBlogs(
   );
 }
 
+export async function getOtherBlogByUserId(
+  params: PaginationParam,
+  id: number,
+  currentBlogID: number,
+): Promise<BlogPost> {
+  const limit = params.limit || 1;
+  const randomNumber = Math.floor(Math.random() * limit);
+
+  const response = await apiGet<PaginationResponse<BlogPost>>(
+    `/posts/by-user/${id}`,
+  );
+  if (response.data[randomNumber].id === currentBlogID) {
+    const shiftedRandomNumber = (randomNumber + 2) % limit;
+    return response.data[shiftedRandomNumber];
+  }
+
+  return response.data[randomNumber];
+}
+
 export async function getBlogDetail(params: { id: string }): Promise<BlogPost> {
   return await apiGet<BlogPost>(`/posts/${params.id}`);
 }

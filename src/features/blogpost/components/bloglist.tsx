@@ -66,7 +66,8 @@ export default function BlogList({ query }: BlogListProps) {
               <Link href={`/detail/${d.id}`}>
                 <BlogCard
                   title={d.title}
-                  author={d.author.name}
+                  author={d.author.username}
+                  username={d.author.username}
                   content={d.content}
                   comments={d.comments}
                   likes={d.likes}

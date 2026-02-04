@@ -97,7 +97,7 @@ export function Navbar() {
                         </AvatarFallback>
                       </Avatar>
                       <p className="hidden sm:inline text-neutral-950 text-cs-sm leading-7">
-                        {data.name}
+                        {data.username}
                       </p>
                     </div>
                   </PopoverTrigger>

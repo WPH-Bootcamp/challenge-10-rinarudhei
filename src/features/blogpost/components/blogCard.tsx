@@ -25,6 +25,7 @@ type BlogCardProps = {
   likes: number;
   comments: number;
   imageUrl?: string | undefined;
+  username?: string;
 };
 
 export default function BlogCard({
@@ -36,6 +37,7 @@ export default function BlogCard({
   likes,
   comments,
   imageUrl,
+  username,
 }: BlogCardProps) {
   return (
     <div className="flex gap-6 justify-start">
@@ -76,7 +78,7 @@ export default function BlogCard({
               </AvatarFallback>
             </Avatar>
             <p className="text-neutral-900 text-cs-xs lg:text-cs-sm">
-              {author}
+              {username}
             </p>
           </div>
           <Dot size={4} className="bg-neutral-400 rounded-full" />

@@ -15,7 +15,7 @@ export default function PopularBlogs() {
   return (
     <div className="flex flex-col gap-4 lg:gap-5 h-full">
       {isError ? (
-        <div className="flex justify-center items-center min-h-screen mx-auto">
+        <div className="flex justify-center items-center h-20 mx-auto">
           <div className="text-center text-red-600">
             <h2 className="text-2xl font-bold">Error Loading Data</h2>
           </div>

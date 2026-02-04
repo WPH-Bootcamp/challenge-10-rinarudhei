@@ -15,6 +15,7 @@ import { Dot, MessageSquare, ThumbsUp } from "lucide-react";
 import { Separator } from "@/shared/components/ui/separator";
 import Image from "next/image";
 import CommentSection from "@/features/comments/components/commentForm";
+import OtherBlogs from "@/features/blogpost/components/otherBlogs";
 
 export default function DetailBlogContent() {
   const params = useParams<{ id: string }>();
@@ -109,6 +110,8 @@ export default function DetailBlogContent() {
 
             <Separator />
             <CommentSection postId={data.id} />
+            <Separator />
+            <OtherBlogs authorId={data.author.id} currentBlogId={data.id} />
           </div>
         )
       )}

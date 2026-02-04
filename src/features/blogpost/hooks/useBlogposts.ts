@@ -2,6 +2,7 @@ import { PaginationParam, PaginationResponse } from "@/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import {
   getBlogDetail,
+  getOtherBlogByUserId,
   getPopularBlogs,
   getRecommendedBlogs,
 } from "../services/blogpostServices";
@@ -29,6 +30,18 @@ export function useGetPopularBlogs(params: PaginationParam) {
   });
 }
 
+export function useGetOtherBlogByUserId(
+  params: PaginationParam,
+  userId: number,
+  currentBlogId: number,
+) {
+  return useQuery<BlogPost, ApiError>({
+    queryKey: ["userId-blog", params.page, params.limit, userId],
+    placeholderData: keepPreviousData,
+    queryFn: () => getOtherBlogByUserId(params, userId, currentBlogId),
+    staleTime: 1000 * 60 * 5,
+  });
+}
 export function useGetBlogDetail(params: { id: string }) {
   return useQuery<BlogPost, ApiError>({
     queryKey: ["detail-blog", params.id],
