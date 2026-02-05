@@ -1,6 +1,7 @@
 import { Spinner } from "@/shared/components/ui/spinner";
 import BlogCard from "./blogCard";
 import { useGetOtherBlogByUserId } from "../hooks/useBlogposts";
+import Link from "next/link";
 
 type OtherBlogsProps = {
   authorId: number;
@@ -23,7 +24,7 @@ export default function OtherBlogs({
       ) : isPending ? (
         <Spinner className="mx-auto mt-20">Loading...</Spinner>
       ) : (
-        <>
+        <Link href={`/detail/${data.id}`}>
           <h2 className="font-bold text-cs-xl text-neutral-900 sm:text-display-sm md:text-display-md lg:text-display-lg xl:text-display-xl h-8.5 md:h-9 p-0 m-0">
             Another Post
           </h2>
@@ -38,7 +39,7 @@ export default function OtherBlogs({
             comments={data.comments}
             imageUrl={data.imageUrl}
           />
-        </>
+        </Link>
       )}
     </div>
   );

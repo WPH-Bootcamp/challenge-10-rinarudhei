@@ -16,7 +16,6 @@ export function useAddComment() {
     },
     onSuccess: async () => {
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ["userId-blog"] }),
         queryClient.invalidateQueries({ queryKey: ["detail-blog"] }),
         queryClient.invalidateQueries({ queryKey: ["popular-blog"] }),
         queryClient.invalidateQueries({ queryKey: ["recommended-blog"] }),
