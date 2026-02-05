@@ -1,0 +1,44 @@
+"use client";
+import React from "react";
+import { Spinner } from "@/shared/components/ui/spinner";
+import { useGetPopularBlogs } from "../hooks/useBlogposts";
+import { Separator } from "@/shared/components/ui/separator";
+import PopularCard from "./popularCard";
+import Link from "next/link";
+
+export default function PopularBlogs() {
+  const { data, isError, isPending } = useGetPopularBlogs({
+    limit: 3,
+    page: 1,
+  });
+
+  return (
+    <div className="flex flex-col gap-4 lg:gap-5 h-full">
+      {isError ? (
+        <div className="flex justify-center items-center h-20 mx-auto">
+          <div className="text-center text-red-600">
+            <h2 className="text-2xl font-bold">Error Loading Data</h2>
+          </div>
+        </div>
+      ) : isPending ? (
+        <Spinner className="mx-auto mt-20">Loading...</Spinner>
+      ) : (
+        <>
+          {data?.data.map((d, i, arr) => (
+            <React.Fragment key={i}>
+              <Link href={`/detail/${d.id}`}>
+                <PopularCard
+                  title={d.title}
+                  content={d.content}
+                  comments={d.comments}
+                  likes={d.likes}
+                ></PopularCard>
+              </Link>
+              {i !== arr.length - 1 && <Separator />}
+            </React.Fragment>
+          ))}
+        </>
+      )}
+    </div>
+  );
+}
