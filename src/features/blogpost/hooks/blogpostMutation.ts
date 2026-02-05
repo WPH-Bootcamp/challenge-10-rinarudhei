@@ -1,21 +1,19 @@
-import {
-  RefetchOptions,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { likeBlogpost } from "../services/blogPostServices";
+import { Dispatch, SetStateAction } from "react";
 
 export function useLikeBlogpost(
   postId: number,
-  refetch: (
-    options?: RefetchOptions,
-  ) => Promise<QueryObserverResult<TData, TError>>,
+  setIsLiked: Dispatch<SetStateAction<boolean>>,
 ) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: likeBlogpost,
+    onMutate: () => {
+      setIsLiked((prev) => !prev);
+    },
     onError: () => {
       toast.error("Failed to like blog");
     },

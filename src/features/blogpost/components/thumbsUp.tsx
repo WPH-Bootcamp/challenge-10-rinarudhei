@@ -19,21 +19,10 @@ export default function ThumbsUpButton({
     currentUserId,
   });
 
-  const { mutate, isPending: mPending } = useLikeBlogpost(Number(postId));
+  const { mutate } = useLikeBlogpost(Number(postId), setIsLiked);
 
   const handleLikeButton = () => {
     mutate({ postId: Number(postId) });
-    if (mPending) {
-      setIsLiked((prev) => !prev);
-    } else {
-      setIsLiked((prev) => {
-        if (data) {
-          return data.some((l) => l.id === currentUserId);
-        }
-
-        return prev;
-      });
-    }
   };
   return (
     <>
