@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserMe } from "../services/userService";
 import { UserMe } from "../types/user";
-import { ApiError } from "next/dist/server/api-utils";
+import { ApiError } from "@/shared/lib/api";
 
 export function useGetMe() {
   return useQuery<UserMe | null, ApiError>({

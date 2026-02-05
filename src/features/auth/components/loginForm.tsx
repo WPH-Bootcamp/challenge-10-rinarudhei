@@ -59,7 +59,7 @@ export default function LoginForm() {
       className="flex flex-col w-86.25 lg:w-90 h-fit rounded-xl outline p-6 gap-5 bg-white border-neutral-200 shadow-[0px_0px_24px_0px_#CDCCCC]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-xl h-8.5 font-bold text-neutral-950 w-full">
+      <h1 className="text-cs-xl h-8.5 font-bold text-neutral-950 w-full">
         Sign In
       </h1>
       <FieldGroup>
