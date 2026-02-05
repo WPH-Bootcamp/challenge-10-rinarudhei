@@ -1,8 +1,17 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  RefetchOptions,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { toast } from "sonner";
 import { likeBlogpost } from "../services/blogPostServices";
 
-export function useLikeBlogpost(postId: number) {
+export function useLikeBlogpost(
+  postId: number,
+  refetch: (
+    options?: RefetchOptions,
+  ) => Promise<QueryObserverResult<TData, TError>>,
+) {
   const queryClient = useQueryClient();
 
   return useMutation({

@@ -41,8 +41,18 @@ export async function getBlogDetail(params: { id: string }): Promise<BlogPost> {
 
 export async function getLikesByPostId(params: {
   id: number;
+  setIsLiked: Dispatch<SetStateAction<boolean>>;
+  currentUserId: number | undefined | null;
 }): Promise<Like[] | null> {
   const response = await apiGet<Like[]>(`/posts/${params.id}/likes`);
+  if (!params.currentUserId) {
+    return response;
+  }
+  if (response.some((l) => l.id === params.currentUserId)) {
+    params.setIsLiked(true);
+  } else {
+    params.setIsLiked(false);
+  }
 
   return response;
 }

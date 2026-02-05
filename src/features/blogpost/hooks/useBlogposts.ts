@@ -32,13 +32,19 @@ export function useGetPopularBlogs(params: PaginationParam) {
   });
 }
 
-export function useGetLikesByPostId(params: { postId: number }) {
+export function useGetLikesByPostId(params: {
+  postId: number;
+  setIsLiked: Dispatch<SetStateAction<boolean>>;
+  currentUserId: number | undefined | null;
+}) {
   return useQuery({
     queryKey: ["likes", params.postId],
     placeholderData: keepPreviousData,
     queryFn: () =>
       getLikesByPostId({
         id: params.postId,
+        setIsLiked: params.setIsLiked,
+        currentUserId: params.currentUserId,
       }),
     staleTime: 1000 * 60 * 5,
   });
