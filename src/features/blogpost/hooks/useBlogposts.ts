@@ -9,6 +9,7 @@ import {
 } from "../services/blogGetServices";
 import { BlogPost } from "../types/blogpost";
 import { ApiError } from "@/shared/lib/api";
+import { Dispatch, SetStateAction } from "react";
 
 export function useGetRecommendedBlogs(
   params: PaginationParam,
@@ -35,7 +36,10 @@ export function useGetLikesByPostId(params: { postId: number }) {
   return useQuery({
     queryKey: ["likes", params.postId],
     placeholderData: keepPreviousData,
-    queryFn: () => getLikesByPostId({ id: params.postId }),
+    queryFn: () =>
+      getLikesByPostId({
+        id: params.postId,
+      }),
     staleTime: 1000 * 60 * 5,
   });
 }

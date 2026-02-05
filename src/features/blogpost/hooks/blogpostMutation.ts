@@ -2,20 +2,25 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { likeBlogpost } from "../services/blogPostServices";
 
-export function useLikeBlogpost() {
+export function useLikeBlogpost(postId: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    onMutate: likeBlogpost,
+    mutationFn: likeBlogpost,
     onError: () => {
       toast.error("Failed to like blog");
     },
-    onSuccess: async () => {
+    onSettled: async () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["userId-blog"] }),
         queryClient.invalidateQueries({ queryKey: ["detail-blog"] }),
         queryClient.invalidateQueries({ queryKey: ["popular-blog"] }),
         queryClient.invalidateQueries({ queryKey: ["recommended-blog"] }),
+        queryClient.invalidateQueries({ queryKey: ["recommended-blog"] }),
+        queryClient.invalidateQueries({
+          queryKey: ["likes", postId],
+          refetchType: "active",
+        }),
       ]);
     },
   });

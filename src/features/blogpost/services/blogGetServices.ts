@@ -1,6 +1,7 @@
 import { apiGet } from "@/shared/lib/api";
 import { PaginationParam, PaginationResponse } from "@/types";
 import { BlogPost, Like } from "../types/blogpost";
+import { Dispatch, SetStateAction } from "react";
 
 export async function getPopularBlogs(
   params: PaginationParam,
@@ -40,8 +41,10 @@ export async function getBlogDetail(params: { id: string }): Promise<BlogPost> {
 
 export async function getLikesByPostId(params: {
   id: number;
-}): Promise<Like[]> {
-  return await apiGet<Like[]>(`/posts/${params.id}/likes`);
+}): Promise<Like[] | null> {
+  const response = await apiGet<Like[]>(`/posts/${params.id}/likes`);
+
+  return response;
 }
 
 export async function getRecommendedBlogs(
